@@ -1,0 +1,137 @@
+package com.company.locker;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.util.Scanner;
+public class LockedMe {
+	static final String projectpath = "C:\\javaphase1project\\CompanyLocker\\lockedmefiles";
+
+	public static void main(String[] args) {
+		Scanner obj = new Scanner(System.in);
+		
+		int n;
+		do 
+		{
+			displayitems();
+			System.out.println("Enter your choice ");
+			n=Integer.parseInt(obj.nextLine());
+			switch(n) {
+			case 1: getallfiles();
+			break;
+			case 2: createfiles();
+			break;
+			case 3: deletefiles();
+			break;
+			case 4: searchfiles();
+			break;
+			case 5:System.exit(0);
+			break;
+			default : System.out.println("invalid input");
+			}
+			
+		}
+		while (n>0);
+			
+		
+		
+	}
+	
+		public static void displayitems() {
+			System.out.println("********************************");
+			System.out.println("\tWelcome to Company Lockedme ");
+			System.out.println("\tDeveloper name : GowriShankar R");
+			System.out.println("********************************");
+			System.out.println("\t1.Display all the files");
+			System.out.println("\t2.Add files to the existing directoruy");
+			System.out.println("\t3.Delete a file");
+			System.out.println("\t4.Search a file");
+			System.out.println("\t5.Exit ");
+		
+		
+		// TODO Auto-generated method stub
+
+	}
+		public static void getallfiles() {
+			File [] listofFiles = new File(projectpath).listFiles();
+			if (listofFiles.length == 0) {
+				System.out.println("no files existed");
+				
+			}
+			else {
+				for (var l : listofFiles) {
+					System.out.println(l.getName());
+					
+				}
+			}
+			
+		}
+		public static void createfiles() {
+			try {
+				Scanner obj = new Scanner(System.in);
+				String filename;
+				int linecount;
+				System.out.println("Enter the file name");
+				filename = obj.nextLine();
+				System.out.println("Enter the number of lines needed");
+				linecount = Integer.parseInt(obj.nextLine());
+				FileWriter fw = new FileWriter(projectpath+"\\"+filename);
+				for (int i=1 ;i<=linecount; i++) {
+					System.out.println("Enter the file content line");
+					fw.write(obj.nextLine()+"\n");
+				}
+				System.out.println("File created");
+				fw.close();
+				}
+				
+				
+				catch(Exception e){
+					System.out.println("Error occured");
+					
+			}
+				
+		}
+		public static void deletefiles() {
+			Scanner obj = new Scanner(System.in);
+			try {
+			
+				String filename;
+				System.out.println("Enter the file to be deleted");
+				filename = obj.nextLine();
+				File fi = new File (projectpath+"\\"+filename);
+				if (fi.exists()) 
+				{
+						fi.delete();
+						System.out.println("File is delected");
+			}
+				else { 
+					System.out.println("File does not exist");
+				}}
+			catch (Exception e) {
+				System.out.println("Error occured");
+			}
+		}
+		public static void searchfiles() {
+			Scanner obj = new Scanner(System.in);
+		try {
+		
+			String filename;
+			System.out.println("Enter the file name to be searched: ");
+			filename = obj.nextLine();
+			File fi = new File (projectpath+"\\"+filename);
+			if (fi.exists()) 
+			{
+					
+					System.out.println("File is available");
+		}
+			else { 
+				System.out.println("File does not exist");
+			}
+		}
+			catch(Exception e){
+				System.out.println("Error occured");
+			}
+		}
+			
+			
+		}
+		
